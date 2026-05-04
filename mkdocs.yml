@@ -1,0 +1,98 @@
+site_name: Salesforce AI Development Field Guide
+site_description: A production-grade methodology for using AI coding tools in Salesforce development. Covers prompt engineering, security, org isolation, and AI-assisted architecture.
+site_author: Ibrahim Alameh
+site_url: https://ialameh.github.io/salesforce-ai-development-field-guide/
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - toc.follow
+    - content.code.copy
+
+plugins:
+  - search
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Quickstart:
+    - 00-quickstart.md
+    - Q1: quickstart/01-ai-safety-checklist.md
+    - Q2: quickstart/02-ai-tool-setup.md
+  - Foundations:
+    - F1: foundations/01-the-salesforce-ai-stack.md
+    - F2: foundations/02-roles-and-personas.md
+    - F3: foundations/03-prompt-anatomy.md
+    - F4: foundations/04-what-salesforce-breaks-ai.md
+  - AI Prompt Engineering:
+    - P1: ai-prompt-engineering/01-prompts-for-apex.md
+    - P2: ai-prompt-engineering/02-prompts-for-lwc.md
+    - P3: ai-prompt-engineering/03-prompts-for-flows.md
+    - P4: ai-prompt-engineering/04-prompts-for-testing.md
+    - P5: ai-prompt-engineering/05-prompts-for-ci-cd.md
+    - P6: ai-prompt-engineering/06-planning-with-ai.md
+    - P7: ai-prompt-engineering/07-multi-agent-workflows.md
+  - AI Security:
+    - S1: ai-security/01-the-five-destruction-scenarios.md
+    - S2: ai-security/02-org-isolation-strategy.md
+    - S3: ai-security/03-prompt-hygiene.md
+    - S4: ai-security/04-ai-tool-permissions-configuration.md
+    - S5: ai-security/05-reviewing-ai-generated-code.md
+    - S6: ai-security/06-secrets-management.md
+    - S7: ai-security/07-compliance-considerations.md
+    - S8: ai-security/08-ai-generated-code-audit-trail.md
+  - Reference:
+    - R1: reference/01-prompt-templates-library.md
+    - R2: reference/02-anti-pattern-catalog.md
+    - R3: reference/03-ai-tool-settings-reference.md
+  - Worked Material:
+    - WM1: worked-material/01-case-studies.md
+    - WM2: worked-material/02-annotated-prompt-examples.md
+  - Site and CI:
+    - CI1: site-and-ci/01-github-actions-workflow.md
+  - Glossary: glossary.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ialameh/salesforce-ai-development-field-guide
+
+extra_css:
+  - stylesheets/extra.css
+
+copyright: >
+  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+    CC BY 4.0
+  </a>
