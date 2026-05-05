@@ -31,15 +31,34 @@ jobs:
       - name: Copy content to docs/
         run: |
           mkdir -p docs
-          cp *.md docs/ 2>/dev/null || true
-          cp -r diagrams docs/ 2>/dev/null || true
+
+          # Individual root markdown files
+          for f in README.md CHANGELOG.md CODE_OF_CONDUCT.md CONTRIBUTING.md glossary.md REFERENCES.md VERIFICATION.md 00-quickstart.md; do
+            [ -f "$f" ] && cp "$f" "docs/" 2>/dev/null || true
+          done
+
+          # Subdirectory chapters
+          for dir in quickstart foundations ai-prompt-engineering ai-security reference worked-material site-and-ci; do
+            [ -d "$dir" ] && cp -r "$dir" docs/ 2>/dev/null || true
+          done
+
+          # Cookbook, templates, diagrams, case-studies
           cp -r cookbook docs/ 2>/dev/null || true
           cp -r templates docs/ 2>/dev/null || true
+          cp -r diagrams docs/ 2>/dev/null || true
           cp -r case-studies docs/ 2>/dev/null || true
+
+          # Stylesheets if any
+          cp -r stylesheets docs/ 2>/dev/null || true
+
+          # README becomes index
           cp README.md docs/index.md
 
       - name: Build site
-        run: mkdocs build
+        run: |
+          mkdocs build
+          # Create .nojekyll to prevent GitHub Pages from processing the site
+          touch site/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
