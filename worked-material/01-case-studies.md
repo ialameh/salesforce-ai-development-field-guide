@@ -42,17 +42,17 @@ The submission passed Security Review on first submission, which is unusual. The
 
 ### Key factors in the success
 
-1. **Specific prompts** — The prompts described the exact security requirements, not just "make it secure"
-2. **security-AI review** — The dedicated security review phase before human review caught FLS issues that the developer-AI had not addressed
-3. **selector pattern** — Using selectors for all queries prevented SOQL injection by keeping queries static
-4. **Named Credentials reference** — The prompt explicitly said to use Named Credentials by name, not by value
-5. **bulk-safe from the start** — The prompt specified bulk requirements, so the code handled 200-record scenarios correctly
+1. **Specific prompts**: The prompts described the exact security requirements, not just "make it secure"
+2. **security-AI review**: The dedicated security review phase before human review caught FLS issues that the developer-AI had not addressed
+3. **selector pattern**: Using selectors for all queries prevented SOQL injection by keeping queries static
+4. **Named Credentials reference**: The prompt explicitly said to use Named Credentials by name, not by value
+5. **bulk-safe from the start**: The prompt specified bulk requirements, so the code handled 200-record scenarios correctly
 
 ### Lessons
 
 - AI can generate Security-Review-ready code if the prompts are specific about security requirements
 - The security-AI review phase is not optional for code going to Security Review
-- Selector pattern is not just an architectural preference — it is a security control (prevents SOQL injection)
+- Selector pattern is not just an architectural preference; it is a security control (prevents SOQL injection)
 
 ## Case Study 2: AI-Generated Apex Caused Governor Limit Cascade
 
@@ -92,7 +92,7 @@ public void execute(Database.BatchableContext ctx, List<Order> orders) {
 
 The problem: when the scope contained 200 Orders, the query returned up to 2,000 OrderItems. The AI did not account for OrderItems with many line items per order, nor did it account for the SOQL limit within the execute context.
 
-The AI had been instructed to put all SOQL outside loops, but had not been instructed about SOQL inside batch execute methods. The prompt had said "no SOQL inside loops," which the AI followed correctly inside the business logic — but the AI treated the batch execute method itself as a different context.
+The AI had been instructed to put all SOQL outside loops, but had not been instructed about SOQL inside batch execute methods. The prompt had said "no SOQL inside loops," which the AI followed correctly inside the business logic, but the AI treated the batch execute method itself as a different context.
 
 ### The failure sequence
 
@@ -107,10 +107,10 @@ The AI had been instructed to put all SOQL outside loops, but had not been instr
 
 ### Key factors in the failure
 
-1. **Missing bulk test** — Tests used 10 records per scope, never tested the edge case of Orders with many line items
-2. **Missing scope analysis** — The AI did not reason about what a worst-case scope looked like (200 Orders with varying line item counts)
-3. **No governor limit context** — The prompt did not specify that the execute() method is a separate governor limit context with the same 100-SOQL limit
-4. **No chunking strategy** — The AI did not propose chunking large scopes or handling orders with many items differently
+1. **Missing bulk test**: Tests used 10 records per scope, never tested the edge case of Orders with many line items
+2. **Missing scope analysis**: The AI did not reason about what a worst-case scope looked like (200 Orders with varying line item counts)
+3. **No governor limit context**: The prompt did not specify that the execute() method is a separate governor limit context with the same 100-SOQL limit
+4. **No chunking strategy**: The AI did not propose chunking large scopes or handling orders with many items differently
 
 ### The fix
 
@@ -125,7 +125,7 @@ The batch was redesigned with a chunking approach inside execute():
 - AI-generated batch classes need specific governor limit context: execute() runs in its own 100-SOQL-limit context
 - Test with worst-case data, not typical-case data (one Order with 400 line items is more realistic than 200 Orders with 2 line items each)
 - Bulk tests must use realistic data volumes and realistic data shapes
-- The "no SOQL in loops" rule does not cover "no SOQL in execute() methods" — batch-specific constraints must be stated explicitly
+- The "no SOQL in loops" rule does not cover "no SOQL in execute() methods"; batch-specific constraints must be stated explicitly
 
 ## What this chapter covered
 

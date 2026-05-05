@@ -5,10 +5,10 @@ Every good prompt for AI-assisted Salesforce development has four parts. Getting
 ## The four parts of a Salesforce prompt
 
 A complete prompt has:
-1. **System context** — what the AI knows about your project and role
-2. **Task framing** — what you want built and why
-3. **Output constraints** — rules the code must follow
-4. **Validation criteria** — how you know the output is correct
+1. **System context**: what the AI knows about your project and role
+2. **Task framing**: what you want built and why
+3. **Output constraints**: rules the code must follow
+4. **Validation criteria**: how you know the output is correct
 
 Most developers write only the task framing. They say "write a batch class" and get back a batch class that compiles but has SOQL in the execute method, no bulk handling, and no test coverage. The missing parts are why.
 

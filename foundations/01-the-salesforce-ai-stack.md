@@ -6,11 +6,11 @@ This chapter maps the tools, models, and integrations that make up the modern Sa
 
 The Salesforce AI development stack has three layers:
 
-1. **The AI coding tool** — the interface you type into. Claude Code, GitHub Copilot, Cursor, Amazon CodeWhisperer all fit here. This is what most developers think of as "the AI."
+1. **The AI coding tool**: the interface you type into. Claude Code, GitHub Copilot, Cursor, Amazon CodeWhisperer all fit here. This is what most developers think of as "the AI."
 
-2. **The model** — the language model powering the tool. Claude (Anthropic), GPT-4o (OpenAI), Gemini (Google), Codestral (Mistral), Llama (Meta). Each has different context windows, cost structures, and strengths for Salesforce work.
+2. **The model**: the language model powering the tool. Claude (Anthropic), GPT-4o (OpenAI), Gemini (Google), Codestral (Mistral), Llama (Meta). Each has different context windows, cost structures, and strengths for Salesforce work.
 
-3. **The Salesforce integration layer** — how the tool connects to Salesforce. Salesforce-specific extensions in the IDE, sf CLI integration, scratch org authentication, and deployment pipelines.
+3. **The Salesforce integration layer**: how the tool connects to Salesforce. Salesforce-specific extensions in the IDE, sf CLI integration, scratch org authentication, and deployment pipelines.
 
 Most developers spend all their time thinking about layer 1. The failures that burn you happen in layers 2 and 3.
 
@@ -38,13 +38,13 @@ Included with AWS and JetBrains tooling. Less Salesforce-aware than Claude Code 
 
 A language model is characterized by context window, cost, and training data. For Salesforce work, the relevant characteristics are:
 
-**Context window** — How much code you can feed in at once. Salesforce projects with selector layers, service layers, and domain layers can hit 50k+ tokens of context. If the model cannot hold your entire class structure, it loses cross-class awareness and starts generating single-file solutions that break your architecture.
+**Context window**: How much code you can feed in at once. Salesforce projects with selector layers, service layers, and domain layers can hit 50k+ tokens of context. If the model cannot hold your entire class structure, it loses cross-class awareness and starts generating single-file solutions that break your architecture.
 
-**Knowledge cutoff** — When the model's training data ends. Models trained before Spring 2025 do not know about recent Apex features, Flow enhancements, or platform changes. They also do not know about recent security vulnerabilities or governor limit changes.
+**Knowledge cutoff**: When the model's training data ends. Models trained before Spring 2025 do not know about recent Apex features, Flow enhancements, or platform changes. They also do not know about recent security vulnerabilities or governor limit changes.
 
-**Salesforce-specific knowledge** — Most models have seen Salesforce documentation and Stack Exchange posts in training, but the depth varies. Claude and GPT-4o tend to have the best Salesforce knowledge. CodeWhisperer is weaker on Apex patterns.
+**Salesforce-specific knowledge**: Most models have seen Salesforce documentation and Stack Exchange posts in training, but the depth varies. Claude and GPT-4o tend to have the best Salesforce knowledge. CodeWhisperer is weaker on Apex patterns.
 
-**Cost structure** — Claude Code pricing includes token costs. Copilot is a flat subscription. Per-token pricing matters if you run large refactors that generate 100k+ tokens.
+**Cost structure**: Claude Code pricing includes token costs. Copilot is a flat subscription. Per-token pricing matters if you run large refactors that generate 100k+ tokens.
 
 ## The integration layer
 

@@ -4,8 +4,8 @@ This chapter sets up Claude Code specifically for Salesforce development. The sa
 
 ## What to install
 
-1. Salesforce CLI (`sf`) — authentication and org management
-2. Claude Code — the AI coding tool
+1. Salesforce CLI (`sf`): authentication and org management
+2. Claude Code: the AI coding tool
 3. A code editor with Salesforce extensions (VS Code + Salesforce Extension Pack recommended)
 
 Install Salesforce CLI:

@@ -6,11 +6,11 @@ Lightweight Web Components (LWC) sit at the intersection of Apex and the browser
 
 LWC fails differently than Apex:
 
-1. **Reactivity mismatches** — AI uses the wrong reactive decorator or mutates a tracked property in a way that does not trigger a re-render
-2. **Wire vs imperative** — AI picks the wrong data fetch strategy, using @wire when imperative Apex would be simpler and more controllable
-3. **Client-side authorization** — AI hides buttons or disables features client-side, treating UI hiding as authorization (it is not)
-4. **Promise chain breakage** — AI generates async LWC code that loses errors or creates unhandled promise rejections
-5. **LDS misuse** — AI over-fetches or under-fetches data by not understanding Lightning Data Service's caching behavior
+1. **Reactivity mismatches**: AI uses the wrong reactive decorator or mutates a tracked property in a way that does not trigger a re-render
+2. **Wire vs imperative**: AI picks the wrong data fetch strategy, using @wire when imperative Apex would be simpler and more controllable
+3. **Client-side authorization**: AI hides buttons or disables features client-side, treating UI hiding as authorization (it is not)
+4. **Promise chain breakage**: AI generates async LWC code that loses errors or creates unhandled promise rejections
+5. **LDS misuse**: AI over-fetches or under-fetches data by not understanding Lightning Data Service's caching behavior
 
 ## The non-negotiable LWC constraints
 

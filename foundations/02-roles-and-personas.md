@@ -132,12 +132,12 @@ You are security-AI. Review this Apex controller for a Lightning component that 
 
 A typical feature session cycles through roles:
 
-1. **architect-AI** — designs the approach, defines the boundaries
-2. **developer-AI** — writes the code within those boundaries
-3. **reviewer-AI** — finds issues before human review
-4. **security-AI** — validates authorization and data handling
-5. **developer-AI** — fixes what reviewer and security found
-6. **reviewer-AI** — confirms fixes are complete
+1. **architect-AI**: designs the approach, defines the boundaries
+2. **developer-AI**: writes the code within those boundaries
+3. **reviewer-AI**: finds issues before human review
+4. **security-AI**: validates authorization and data handling
+5. **developer-AI**: fixes what reviewer and security found
+6. **reviewer-AI**: confirms fixes are complete
 
 This cycle is not bureaucracy. Each role catch prevents different failure modes. architect-AI prevents structural mistakes. reviewer-AI catches governor limit and bulk failures. security-AI catches authorization gaps that could cause data exposure.
 

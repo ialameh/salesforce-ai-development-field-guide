@@ -6,11 +6,11 @@ AI coding tools default to patterns that work in most programming environments. 
 
 AI fails on Salesforce in five predictable ways:
 
-1. **Single-record thinking** — AI generates code that works on one record and fails on 200
-2. **Metadata blindness** — AI does not know your org's specific metadata, Custom Metadata, or permission sets
-3. **Limit hallucination** — AI invents APIs, limits, or features that do not exist
-4. **Async complexity underestimation** — AI treats async as an afterthought rather than a critical design decision
-5. **Flow ignorance** — AI treats Flows as simple when they are among the most complex configuration artifacts in the platform
+1. **Single-record thinking**: AI generates code that works on one record and fails on 200
+2. **Metadata blindness**: AI does not know your org's specific metadata, Custom Metadata, or permission sets
+3. **Limit hallucination**: AI invents APIs, limits, or features that do not exist
+4. **Async complexity underestimation**: AI treats async as an afterthought rather than a critical design decision
+5. **Flow ignorance**: AI treats Flows as simple when they are among the most complex configuration artifacts in the platform
 
 Each category has specific patterns. When you know what the AI will do wrong, you can write prompts that correct for it.
 

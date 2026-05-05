@@ -6,12 +6,12 @@ AI-assisted Salesforce CI/CD has two distinct failure modes: AI generating pipel
 
 AI generates pipeline YAML that looks correct and has these common problems:
 
-1. **Missing approval gates** — the pipeline deploys to staging and production without manual approval
-2. **No scratch org validation** — deployments go directly to the authenticated org without testing in a fresh org
-3. **Destructive changes without review** — destructiveChanges.xml is auto-applied
-4. **No test enforcement** — tests run but failures do not block deployment
-5. **Secrets in pipeline variables** — API keys or credentials stored in plaintext pipeline variables
-6. **Production deploy on main branch push** — main branch merges auto-deploy to production without review
+1. **Missing approval gates**: the pipeline deploys to staging and production without manual approval
+2. **No scratch org validation**: deployments go directly to the authenticated org without testing in a fresh org
+3. **Destructive changes without review**: destructiveChanges.xml is auto-applied
+4. **No test enforcement**: tests run but failures do not block deployment
+5. **Secrets in pipeline variables**: API keys or credentials stored in plaintext pipeline variables
+6. **Production deploy on main branch push**: main branch merges auto-deploy to production without review
 
 ## CI/CD prompt constraints
 

@@ -4,11 +4,11 @@ AI coding tools introduce five failure categories that are specific to AI-assist
 
 ## The five scenarios
 
-1. **Org wipe** — AI deletes everything in a production org
-2. **Data exfiltration** — AI extracts sensitive data from Salesforce and sends it somewhere
-3. **Credential exposure** — AI writes credentials to logs, code, or external systems
-4. **Metadata corruption** — AI introduces breaking changes that corrupt org configuration
-5. **Production deploy without review** — AI pushes code directly to production, bypassing human review
+1. **Org wipe**: AI deletes everything in a production org
+2. **Data exfiltration**: AI extracts sensitive data from Salesforce and sends it somewhere
+3. **Credential exposure**: AI writes credentials to logs, code, or external systems
+4. **Metadata corruption**: AI introduces breaking changes that corrupt org configuration
+5. **Production deploy without review**: AI pushes code directly to production, bypassing human review
 
 Each scenario has a specific cause. They are not random failures. They are predictable patterns that happen when AI tools are misconfigured, when prompts include sensitive data, or when review workflows are bypassed.
 
@@ -26,10 +26,10 @@ The root cause is org alias confusion. During a session, a developer authenticat
 
 ### Prevention
 
-- **Deny production orgs in AI tool permissions** — Configure the AI tool to deny any `sf org delete` command against production org aliases. Use the alias-based deny pattern in `~/.claude/settings.json`.
-- **Never authenticate production to a machine running AI tools** — Use a dedicated CI/CD machine with manual approval gates for production access. Developer machines should only have scratch org authentication.
-- **Use different auth mechanisms for scratch vs production** — Scratch orgs via sf CLI on developer machines. Production only via CI/CD with manual approval.
-- **Verify org list before every AI session** — Run `sf org list` and confirm only scratch orgs are present before starting an AI-assisted session.
+- **Deny production orgs in AI tool permissions**: Configure the AI tool to deny any `sf org delete` command against production org aliases. Use the alias-based deny pattern in `~/.claude/settings.json`.
+- **Never authenticate production to a machine running AI tools**: Use a dedicated CI/CD machine with manual approval gates for production access. Developer machines should only have scratch org authentication.
+- **Use different auth mechanisms for scratch vs production**: Scratch orgs via sf CLI on developer machines. Production only via CI/CD with manual approval.
+- **Verify org list before every AI session**: Run `sf org list` and confirm only scratch orgs are present before starting an AI-assisted session.
 
 ## Scenario 2: Data exfiltration
 
@@ -45,10 +45,10 @@ The prompt contains data that should not leave the org. Developers paste SOQL wi
 
 ### Prevention
 
-- **Prompt hygiene rules** — The team rule is: no PII, no credentials, no internal org structure in prompts. Ever. SOQL queries in prompts use sample data, not production record IDs.
-- **Sanitize before pasting** — Before pasting any Salesforce content into an AI tool, remove real record IDs, real names, real email addresses, and any data that identifies customers or internal systems.
-- **Use scratch orgs for AI-assisted development** — Real customer data stays in sandbox and production. AI tools only see sanitized scratch org data.
-- **Verify AI tool data handling policy** — Understand whether your AI tool's provider logs prompts and for how long. Claude Code by default does not log prompts to training. Other tools may.
+- **Prompt hygiene rules**: The team rule is: no PII, no credentials, no internal org structure in prompts. Ever. SOQL queries in prompts use sample data, not production record IDs.
+- **Sanitize before pasting**: Before pasting any Salesforce content into an AI tool, remove real record IDs, real names, real email addresses, and any data that identifies customers or internal systems.
+- **Use scratch orgs for AI-assisted development**: Real customer data stays in sandbox and production. AI tools only see sanitized scratch org data.
+- **Verify AI tool data handling policy**: Understand whether your AI tool's provider logs prompts and for how long. Claude Code by default does not log prompts to training. Other tools may.
 
 ## Scenario 3: Credential exposure
 
@@ -71,10 +71,10 @@ The AI does not know that the credential should come from Named Credentials unle
 
 ### Prevention
 
-- **Always specify Named Credentials in prompts** — "Use Named Credentials: ErpApiCredential. Do not hardcode any URL, token, or password."
-- **Verify before running** — reviewer-AI and security-AI reviews catch hardcoded credentials before they reach version control.
-- **Secret scanning in CI/CD** — Add a secret scanner to the pipeline (GitHub Secret Scanning, Snyk, or similar) that blocks commits containing potential credentials.
-- **Never prompt with actual credentials** — If you paste a credential into a prompt to show the AI what to use, that credential is now in the AI provider's logs. Always describe credentials, never paste them.
+- **Always specify Named Credentials in prompts**: "Use Named Credentials: ErpApiCredential. Do not hardcode any URL, token, or password."
+- **Verify before running**: reviewer-AI and security-AI reviews catch hardcoded credentials before they reach version control.
+- **Secret scanning in CI/CD**: Add a secret scanner to the pipeline (GitHub Secret Scanning, Snyk, or similar) that blocks commits containing potential credentials.
+- **Never prompt with actual credentials**: If you paste a credential into a prompt to show the AI what to use, that credential is now in the AI provider's logs. Always describe credentials, never paste them.
 
 ## Scenario 4: Metadata corruption
 
@@ -90,10 +90,10 @@ AI does not know what metadata is already in your org. It generates new metadata
 
 ### Prevention
 
-- **Source tracking for all metadata** — Everything in the org should be in version control. If a Flow was created in the org directly (not via source), retrieve it with `sf project retrieve start` before AI-assisted work.
-- **Review destructiveChanges.xml with a human** — Destructive changes require explicit human review before applying. AI tool permissions should block auto-application of destructive changes.
-- **AI tool deny pattern for destructive deploys** — Configure the AI tool to ask before running `sf project deploy start` with a `destructiveChanges.xml` file.
-- **Metadata diff before deploy** — Use `sf project diff` to compare local source to target org before deploying. Review what will change.
+- **Source tracking for all metadata**: Everything in the org should be in version control. If a Flow was created in the org directly (not via source), retrieve it with `sf project retrieve start` before AI-assisted work.
+- **Review destructiveChanges.xml with a human**: Destructive changes require explicit human review before applying. AI tool permissions should block auto-application of destructive changes.
+- **AI tool deny pattern for destructive deploys**: Configure the AI tool to ask before running `sf project deploy start` with a `destructiveChanges.xml` file.
+- **Metadata diff before deploy**: Use `sf project diff` to compare local source to target org before deploying. Review what will change.
 
 ## Scenario 5: Production deploy without review
 
@@ -109,10 +109,10 @@ The review workflow has a gap. AI-generated code is treated the same as human-wr
 
 ### Prevention
 
-- **Require human review for all AI-generated code** — This is a policy, not a technical control. AI-generated code always goes through human review before deployment. The review checklist in S5 guides the review.
-- **Pipeline approval gates** — Staging-to-production requires human approval in the CI/CD pipeline. No auto-deploy to production regardless of test results.
-- **AI tool ask confirmation for production deploy** — Configure the AI tool to ask before any deploy to a production org alias, even if the CI/CD pipeline is the one running it.
-- **Branch protection** — Main branch requires PR with at least one approval. No direct push to main. This does not guarantee the approver reviewed AI-generated code, so train the team to scrutinize AI-generated PRs specifically.
+- **Require human review for all AI-generated code**: This is a policy, not a technical control. AI-generated code always goes through human review before deployment. The review checklist in S5 guides the review.
+- **Pipeline approval gates**: Staging-to-production requires human approval in the CI/CD pipeline. No auto-deploy to production regardless of test results.
+- **AI tool ask confirmation for production deploy**: Configure the AI tool to ask before any deploy to a production org alias, even if the CI/CD pipeline is the one running it.
+- **Branch protection**: Main branch requires PR with at least one approval. No direct push to main. This does not guarantee the approver reviewed AI-generated code, so train the team to scrutinize AI-generated PRs specifically.
 
 ## What this chapter covered
 
